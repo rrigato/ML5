@@ -16,19 +16,23 @@ def displayTop(train, test):
 	
 	return(train)
 	
-def meanPreciscion(output):
+def meanPrecision(output):
 	'''
 		Calculates the Mean Average Percision @ 3
 	'''
 	#for i in range(0, len(output.index)):
-	output[.str.split(
+	check_ins = output.ix[0,1].split(' ')
+	print(check_ins[0])
+	print(check_ins[2])
+	print(len(output.index))
+
 	
 
 if __name__ == '__main__':
 
-	train = pd.read_csv("../train.csv")
-	test = pd.read_csv("../test.csv")
-	sample = read_csv("../sample_submission.csv")
-	displayTop(train, test)
+	#train = pd.read_csv("../train.csv")
+	#test = pd.read_csv("../test.csv")
+	sample = pd.read_csv("../sample_submission.csv")
+	#displayTop(train, test)
 	meanPrecision(sample)
 	
