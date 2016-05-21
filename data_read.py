@@ -23,6 +23,10 @@ def meanPrecision(output):
 	average_precisions = list(range(len(output.index)))
 	for i in range(0, len(output.index)):
 		check_ins = output.ix[i,1].split(' ')
+		truth = len(check_ins)*[False]
+		for z in range(len(check_ins)):
+			if(check_ins == output.ix[i,2]):
+				truth[z] = True
 
 	np.mean(average_precisions)
 	average_precisions[0:4] = .25
@@ -45,16 +49,20 @@ if __name__ == '__main__':
 	print(sample)
 	print(sample.dtypes)
 	
-	columns = sample.columns.tolist()
-	
-	columns = columns[1] + columns[0] + columns[2]
-	
-	print(columns)
+	#reorder the columns
+	sample = sample[[1,0,2]]
+
 	
 	
 	print(sample)
 	
+	answer = ['005', '004']
 	
+
+
+	print(truth)
+
+	print(truth)
 	#displayTop(train, test)
 	#meanPrecision(sample)
 	
