@@ -20,11 +20,14 @@ def meanPrecision(output):
 	'''
 		Calculates the Mean Average Percision @ 3
 	'''
-	#for i in range(0, len(output.index)):
-	check_ins = output.ix[0,1].split(' ')
-	print(check_ins[0])
-	print(check_ins[2])
-	print(len(output.index))
+	average_precisions = list(range(len(output.index)))
+	for i in range(0, len(output.index)):
+		check_ins = output.ix[i,1].split(' ')
+
+	np.mean(average_precisions)
+	average_precisions[0:4] = .25
+	print(average_precisions[0:4])
+	print(len(average_precisions))
 
 	
 
@@ -32,7 +35,26 @@ if __name__ == '__main__':
 
 	#train = pd.read_csv("../train.csv")
 	#test = pd.read_csv("../test.csv")
-	sample = pd.read_csv("../sample_submission.csv")
+	#sample = pd.read_csv("../sample_submission.csv")
+	
+	row_id = [0, 1]
+	check_in = ['000 001 002','003 004 005']
+
+	actual = ['000', '004']
+	sample = pd.DataFrame({ "Check In":check_in,  "ID": row_id,  "actual":actual})
+	print(sample)
+	print(sample.dtypes)
+	
+	columns = sample.columns.tolist()
+	
+	columns = columns[1] + columns[0] + columns[2]
+	
+	print(columns)
+	
+	
+	print(sample)
+	
+	
 	#displayTop(train, test)
-	meanPrecision(sample)
+	#meanPrecision(sample)
 	
