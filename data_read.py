@@ -50,8 +50,13 @@ def knnImplement(train, test):
 	clf = neighbors.KNeighborsClassifier()
 	clf.fit(X_train, y_train)
 	accuracy = clf.score(X_test, y_test)
+	
+	probabailities = clf.predict_proba(X_test)
+	
+	print(probabilities.head)
 	print(accuracy)
 	return()
+	
 	
 	
 
@@ -63,7 +68,7 @@ if __name__ == '__main__':
 	
 	print(len(train))
 
-	train2 = train.ix[0:100,:]
+	train2 = train.ix[0:3000000,:]
 	
 	test2 = train.ix[100:200,:]
 #	train2= train.ix[0:(len(train)/2), :]
