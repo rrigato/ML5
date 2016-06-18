@@ -9,6 +9,7 @@ from sklearn import grid_search
 
 class cluster():
 	def __init__(self):
+		self.rand = np.random.RandomState(135)
 		print("Initializing the data....")
 		self.readData("write")
 		self.readData("read")
@@ -61,5 +62,28 @@ class cluster():
 		'''
 			Splits the data into train, test and validation sets.
 		'''
+		print("Splitting the data into train test and validation sets:")
+		
+		'''
+			This first train_test_split splits the data into what will be train/test
+			(self.Xfirst, self.Yfirst) and what will be the Validation set(self.Xholdout,
+			self.Yholdout)
+			
+			Note: The validation dataset takes up 15% of the original dataset,
+			while train/test will split the remaining 85 %
+		'''
+		self.Xfirst, self.Xholdout, self.Yfirst, self.Yholdout = train_test_split(
+			self.train.ix[:,0:4], self.train['place_id'], test_size = .15,
+			random_state = self.rand)
+			
+		'''
+			This command splits the first dataset into train and test datasets
+			The train dataset will comprise .8 * .85 = 68% of the original dataset
+			While the test dataset will comprise of .2* .85 = 17% of the original dataset
+		'''
+		self.Xtrain, self.Xtest, self.Ytrain, self.Ytest = train_test_split(
+			self.Xfirst, self.Yfirst, test_size = .2,
+			random_state = self.rand)		
 if __name__ == "__main__":
 	myCls = cluster()
+	myCls.splitData()
