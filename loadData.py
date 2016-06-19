@@ -84,6 +84,18 @@ class cluster():
 		self.Xtrain, self.Xtest, self.Ytrain, self.Ytest = train_test_split(
 			self.Xfirst, self.Yfirst, test_size = .2,
 			random_state = self.rand)
+			
+			
+		'''
+			Testing to make sure the sum of the observations in train/test/holdout 
+			equals the number of observations in the original training dataset
+		'''
+		if (len(self.Ytrain) + len(self.Ytest) + len(self.Yholdout)) != len(self.train):
+			print("Error: Not all observations are in the train/test/validation sets:")
+			sys.exit(1)
+		if (len(self.Xtrain) + len(self.Xtest) + len(self.Xholdout)) != len(self.train):
+			print("Error: Not all observations are in the train/test/validation sets:")
+			sys.exit(1)			
 		
 
 	def writeData(self):		
@@ -134,3 +146,4 @@ class cluster():
 if __name__ == "__main__":
 	myCls = cluster()
 	myCls.splitData()
+	myCls.writeData()
