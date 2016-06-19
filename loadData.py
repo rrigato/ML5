@@ -83,7 +83,54 @@ class cluster():
 		'''
 		self.Xtrain, self.Xtest, self.Ytrain, self.Ytest = train_test_split(
 			self.Xfirst, self.Yfirst, test_size = .2,
-			random_state = self.rand)		
+			random_state = self.rand)
+		
+
+	def writeData(self):		
+			
+		'''
+			The files are a list with  the name each file extension will take 
+			once it is serialized
+			The datasets is a list of the corresponding train, test and validation to be serialized
+		'''
+		files = ['Xtrain', 'Xtest', 'Ytrain', 'Ytest', 'Xholdout', 'Yholdout']	
+		datasets = [ self.Xtrain, self.Xtest, self.Ytrain, self.Ytest, self.Xholdout, self.Yholdout]
+		
+		'''
+			This loop iterates over each of: train X and Y datasets, test X and Y datasets,
+			and holdout X and Y datasets.
+			
+			The algorithm is that that for each iteration of the loop, the program checks to see 
+			if that particular file has been serialized. If it has been serialized the file is 
+			closed and the user is alerted of the files location. If the file does not exist,
+			and IOError is caught and the data is written to a .p file
+			
+			Example:
+				if array of X variables for train does not exist at 
+				"C:/Users/Punkiehome1/Downloads/kaggleFacebook/Xtrain.p" then the
+				an IOError is thrown and the data is written to that location from
+				self.Xtrain
+				
+				Otherwise, the file connection is closed
+		'''
+		for file, dataset in zip(files, datasets):
+			try:
+				fConnect = open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p","r")
+			except IOError as e:
+				print("The data has not been serialized I will do that now")
+				pickle.dump(dataset, open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p",
+							"wb"))
+				print("\n Data has been serialized at: ")
+				print("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p")
+			except:
+				print("Unknown Error: ")
+				print(sys.exc_info()[0])
+				sys.exit(1)
+			else:
+				print("The Data has been serialized at:")
+				print("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p")
+				fConnect.close()			
+		
 if __name__ == "__main__":
 	myCls = cluster()
 	myCls.splitData()
