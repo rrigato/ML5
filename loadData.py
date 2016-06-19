@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import matplotlib as plt
 import sys
 import pickle
 from sklearn.cross_validation import train_test_split
@@ -13,7 +12,7 @@ class cluster():
 		print("Initializing the data....")
 		self.readData("write")
 		self.readData("read")
-		print(self.train.head)
+		print(self.train.shape)
 
 		
 	def readData(self, option):
@@ -24,24 +23,24 @@ class cluster():
 		try:
 			if option == 'write':
 				try:
-					file = open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.p","r")
+					file = open("C:/Users/ryan/kaggleFacebook/train.p","r")
 				except IOError as e:
 					print("The data has not been serialized I will do that now")
-					self.train = pd.read_csv("C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.csv")
-					pickle.dump(self.train, open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.p",
+					self.train = pd.read_csv("C:/Users/ryan/kaggleFacebook/train.csv")
+					pickle.dump(self.train, open("C:/Users/ryan/kaggleFacebook/train.p",
 						"wb"))
 					print("\n Data has been serialized at: ")
-					print("C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.p")
+					print("C:/Users/ryan/kaggleFacebook/train.p")
 				except:
 					print("Unknown Error: ")
 					print(sys.exc_info()[0])
 					sys.exit(1)
 				else:
-					print("The Data has been serialized at C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.p")
+					print("The Data has been serialized at C:/Users/ryan/kaggleFacebook/train.p")
 					file.close()
 			elif option == 'read':
 				print("Reading Data from pickle object...")
-				self.train = pickle.load(open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/train.p",
+				self.train = pickle.load(open("C:/Users/ryan/kaggleFacebook/train.p",
 						"rb"))
 				print("Data is loaded")
 				
@@ -119,7 +118,7 @@ class cluster():
 			
 			Example:
 				if array of X variables for train does not exist at 
-				"C:/Users/Punkiehome1/Downloads/kaggleFacebook/Xtrain.p" then the
+				"C:/Users/ryan/kaggleFacebook/Xtrain.p" then the
 				an IOError is thrown and the data is written to that location from
 				self.Xtrain
 				
@@ -127,20 +126,20 @@ class cluster():
 		'''
 		for file, dataset in zip(files, datasets):
 			try:
-				fConnect = open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p","r")
+				fConnect = open("C:/Users/ryan/kaggleFacebook/" + file + ".p","r")
 			except IOError as e:
 				print("The data has not been serialized I will do that now")
-				pickle.dump(dataset, open("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p",
+				pickle.dump(dataset, open("C:/Users/ryan/kaggleFacebook/" + file + ".p",
 							"wb"))
 				print("\n Data has been serialized at: ")
-				print("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p")
+				print("C:/Users/ryan/kaggleFacebook/" + file + ".p")
 			except:
 				print("Unknown Error: ")
 				print(sys.exc_info()[0])
 				sys.exit(1)
 			else:
 				print("The Data has been serialized at:")
-				print("C:/Users/Punkiehome1/Downloads/kaggleFacebook/" + file + ".p")
+				print("C:/Users/ryan/kaggleFacebook/" + file + ".p")
 				fConnect.close()			
 		
 if __name__ == "__main__":
