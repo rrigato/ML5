@@ -33,8 +33,12 @@ class model:
 			print("Train and test Datasets were successfully loaded")
 			
 	def KNN(self):
-		neigh = KNeighborsClassifier(n_neighbors = 3)
+		neigh = KNeighborsClassifier(n_neighbors = 1, n_jobs = 16)
 		neigh.fit(self.Xtrain[['x','y']], self.Ytrain) 
+		output = neigh.predict(self.Xtest[['x','y']])
+		print(output)
+		print(output.shape)
 
 if __name__ == '__main__':
 	Cls = model()
+	Cls.KNN()
