@@ -54,7 +54,12 @@ FROM events AS b GROUP BY 1")
 
 
 
-
+#used to evaluate unique keys
+for (i in 1:ncol(train))
+{
+	print(length(unique(train[,i])))
+	print(colnames(train)[i])
+}
 
 
 
@@ -64,3 +69,16 @@ events2 = sqldf("SELECT events.event_id, events.device_id,
 	FROM events LEFT JOIN appEvents ON events.event_id = 
 	appEvents.event_id 
 	GROUP BY 1")
+
+
+
+one = sqldf("
+		(SELECT app_labels.app_id, app_labels.label_id, categories.category
+		FROM app_labels LEFT JOIN 
+		categories 
+		ON app_labels.label_id = categories.label_id
+		)one
+		
+
+	
+		")
